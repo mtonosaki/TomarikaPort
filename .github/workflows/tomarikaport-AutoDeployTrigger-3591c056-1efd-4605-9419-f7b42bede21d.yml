@@ -1,0 +1,42 @@
+name: Trigger auto deployment for tomarikaport
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/tomarikaport-AutoDeployTrigger-3591c056-1efd-4605-9419-f7b42bede21d.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.TOMARIKAPORT_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: docker.io
+          registryUsername: ${{ secrets.TOMARIKAPORT_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.TOMARIKAPORT_REGISTRY_PASSWORD }}
+          containerAppName: tomarikaport
+          resourceGroup: port
+          imageToBuild: tmctono/tomarikaport:${{ github.sha }}
+          
+
+     
+
