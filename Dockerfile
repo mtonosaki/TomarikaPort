@@ -3,6 +3,6 @@ WORKDIR /app
 RUN git clone https://github.com/mtonosaki/TomarikaPort.git \
     && cd ./TomarikaPort/backend/ \
     && ./gradlew build -x test -x check \
-    && cd build/libs
+    && mv build/libs/api-0.0.1-SNAPSHOT.jar /app/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","api-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
