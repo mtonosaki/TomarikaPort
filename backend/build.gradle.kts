@@ -25,8 +25,10 @@ dependencies {
 	implementation("com.azure.spring:spring-cloud-azure-starter")
 	implementation("com.azure.spring:spring-cloud-azure-starter-storage")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.13.4")
 }
 
 dependencyManagement {
