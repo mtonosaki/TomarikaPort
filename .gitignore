@@ -1,5 +1,8 @@
 # Tono Setting
 .idea/
+node_modules/
+dist/
+.DS_Store
 
 # GitHub Template
 .gradle
@@ -23,3 +26,4 @@ gradle-app.setting
 .project
 ## JDT-specific (Eclipse Java Development Tools)
 .classpath
+
